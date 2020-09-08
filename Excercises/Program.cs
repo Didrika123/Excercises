@@ -324,9 +324,40 @@ namespace Excercises
         }
         private static void RunExcerciseFourteen()
         {
+            int sum = 0, count = 0;
+            bool keepCounting = true;
+
+            while (keepCounting)
+            {
+                Console.Write("Number (-1 to exit): ");
+                int input = int.Parse(Console.ReadLine());
+                if (input != -1)
+                {
+                    count++;
+                    sum += input;
+                }
+                else keepCounting = false;
+            }
+            Console.WriteLine("Sum: " + sum);
+            Console.WriteLine("Average: " + (double) sum / count);
         }
         private static void RunExcerciseFifteen()
         {
+            int num;
+            Console.Write("\nNumber: ");
+            num = int.Parse(Console.ReadLine());
+            Console.Write("Evenly divisible by: 1");
+            for (int i = 2; i < num / 2 + 1; i++)
+            {
+                if (num % i == 0)
+                    Console.Write("," + i);
+            }
+            Console.WriteLine("\n");
+
+
+            //then do 15B: Write first 3 perfect numbers.
+            int thirdPerfectNumber = -1;
+            Console.WriteLine("\n");
         }
         private static void RunExcerciseSixteen()
         {
