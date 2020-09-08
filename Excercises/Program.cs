@@ -7,7 +7,7 @@ namespace Excercises
         static void Main(string[] args)
         {
             var keepAlive = true;
-            while(keepAlive)
+            while (keepAlive)
             {
                 try
                 {
@@ -44,6 +44,39 @@ namespace Excercises
                         case 9:
                             RunExcerciseNine();
                             break;
+                        case 10:
+                            RunExcerciseTen();
+                            break;
+                        case 11:
+                            RunExcerciseEleven();
+                            break;
+                        case 12:
+                            RunExcerciseTwelve();
+                            break;
+                        case 13:
+                            RunExcerciseThirteen();
+                            break;
+                        case 14:
+                            RunExcerciseFourteen();
+                            break;
+                        case 15:
+                            RunExcerciseFifteen();
+                            break;
+                        case 16:
+                            RunExcerciseSixteen();
+                            break;
+                        case 17:
+                            RunExcerciseSeventeen();
+                            break;
+                        case 18:
+                            RunExcerciseEighteen();
+                            break;
+                        case 19:
+                            RunExcerciseNineteen();
+                            break;
+                        case 20:
+                            RunExcerciseTwenty();
+                            break;
                         case -1:
                             keepAlive = false;
                             break;
@@ -77,8 +110,8 @@ namespace Excercises
         {
             Console.WriteLine("You successfully ran excercise two!\n");
             Console.ResetColor();
-            DateTime dateOfToday = DateTime.Now, 
-                     dateOfYesterday = dateOfToday.AddDays(-1), 
+            DateTime dateOfToday = DateTime.Now,
+                     dateOfYesterday = dateOfToday.AddDays(-1),
                      dateOfTomorrow = dateOfToday.AddDays(1);
             Console.WriteLine($"Today's date is {dateOfToday.ToShortDateString()}\n");
             Console.WriteLine($"Tomorrow's date is {dateOfTomorrow.ToShortDateString()}\n");
@@ -125,12 +158,12 @@ namespace Excercises
             Console.Write("Number B: ");
             numB = int.Parse(Console.ReadLine());
 
-            Console.WriteLine($"Biggest:   \t{(numA < numB? numB : numA)}");
+            Console.WriteLine($"Biggest:   \t{(numA < numB ? numB : numA)}");
             Console.WriteLine($"Smallest:  \t{(numA < numB ? numA : numB)}");
             Console.WriteLine($"Difference:\t{numA - numB}");
             Console.WriteLine($"Sum:       \t{numA + numB}");
             Console.WriteLine($"Product:   \t{numA * numB}");
-            Console.WriteLine($"Ratio:     \t{Math.Round((double) numA / numB, 2)}");
+            Console.WriteLine($"Ratio:     \t{Math.Round((double)numA / numB, 2)}");
         }
         private static void RunExcerciseSeven()
         {
@@ -147,20 +180,20 @@ namespace Excercises
             num = double.Parse(Console.ReadLine());
             Console.WriteLine($"√n:     \t{Math.Round(Math.Sqrt(num), 2)}");
             Console.WriteLine($"n^2:    \t{num * num}");
-            Console.WriteLine($"n^10:   \t{Math.Pow(num,10)}");
+            Console.WriteLine($"n^10:   \t{Math.Pow(num, 10)}");
         }
-        private static bool IsUserWilling(string yesnoquestion)
+        private static bool AskYesNoQuestion(string yesnoquestion)
         {
             bool confirm;
             string response = "";
-            while(response != "yes" && response != "no")
+            while (response != "yes" && response != "no")
             {
                 Console.Write(yesnoquestion);
                 response = Console.ReadLine().ToLower();
             }
             if (response == "yes")
                 confirm = true;
-            else 
+            else
                 confirm = false;
             return confirm;
         }
@@ -174,15 +207,15 @@ namespace Excercises
             birthyear = int.Parse(Console.ReadLine());
             age = DateTime.Now.Year - birthyear;
 
-            if(age >= 18)
+            if (age >= 18)
             {
-                if(IsUserWilling("Want a beer? "))
+                if (AskYesNoQuestion("Want a beer? "))
                 {
                     Console.WriteLine("A beer, you shall have my dude!");
                 }
                 else
                 {
-                    if (IsUserWilling("Want coke? "))
+                    if (AskYesNoQuestion("Want coke? "))
                     {
                         Console.WriteLine("Coke!!!, you shall have my dude!");
                     }
@@ -191,13 +224,124 @@ namespace Excercises
             }
             else
             {
-                if (IsUserWilling("Want coke? "))
+                if (AskYesNoQuestion("Want coke? "))
                 {
                     Console.WriteLine("Coke!!!, you shall have my dude!");
                 }
                 else Console.WriteLine("You're too picky. Go home!");
             }
 
+        }
+        private static void RunExcerciseTen()
+        {
+            int choice = 0, numA, numB;
+            while (choice != -1)
+            {
+                Console.Write("Choice (-1, 1, 2 or 3): ");
+                choice = int.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        Console.Write("Number A: ");
+                        numA = int.Parse(Console.ReadLine());
+                        Console.Write("Number B: ");
+                        numB = int.Parse(Console.ReadLine());
+                        if (numB == 0)
+                            Console.WriteLine("Error: Division by Zero.");
+                        else
+                            Console.WriteLine("A/B equals " + numA / numB);
+                        break;
+                    case 2:
+                        RunExcerciseFour();
+                        break;
+                    case 3:
+                        Console.ForegroundColor = Console.ForegroundColor == ConsoleColor.Blue ? ConsoleColor.Red : ConsoleColor.Blue;
+                        break;
+                }
+            }
+        }
+        private static void RunExcerciseEleven()
+        {
+            int num;
+            Console.Write("Number: ");
+            num = int.Parse(Console.ReadLine());
+            if (num > 0)
+            {
+                for (int i = 0; i < num + 1; i++)
+                {
+                    if (i % 2 == 0)
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    else Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(i);
+                }
+                Console.WriteLine("-----------------------------------");
+                for (int i = num; i >= 0; i--)
+                {
+                    if (i % 2 == 0)
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    else Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(i);
+                }
+            }
+            else
+            {
+                Console.WriteLine("ERROR: 0 iS NOT OK");
+            }
+        }
+        private static void RunExcerciseTwelve()
+        {
+            for (int x = 1; x < 11; x++)
+            {
+                for (int y = 1; y < 11; y++)
+                {
+                    Console.Write($"\t{y * x,3}");
+                }
+                Console.Write("\n");
+            }
+        }
+        private static void RunExcerciseThirteen()
+        {
+            int numGuesses = 0, guess = -1, randomNumber = new Random().Next(1, 500);
+
+            while (guess != randomNumber)
+            {
+                Console.Write("Guess the number between 1 and 500: ");
+                guess = int.Parse(Console.ReadLine());
+                numGuesses++;
+                if (guess < randomNumber)
+                {
+                    Console.WriteLine("Too small!");
+                }
+                else if (guess > randomNumber)
+                {
+                    Console.WriteLine("Too big!");
+                }
+                else
+                {
+                    Console.WriteLine($"\nHEUREKA, {randomNumber} IS CORRECT! (in {numGuesses} attempts)\n");
+                }
+            }
+        }
+        private static void RunExcerciseFourteen()
+        {
+        }
+        private static void RunExcerciseFifteen()
+        {
+        }
+        private static void RunExcerciseSixteen()
+        {
+        }
+        private static void RunExcerciseSeventeen()
+        {
+        }
+        private static void RunExcerciseEighteen()
+        {
+        }
+        private static void RunExcerciseNineteen()
+        {
+        }
+        private static void RunExcerciseTwenty()
+        {
         }
     }
 }
