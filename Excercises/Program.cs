@@ -50,11 +50,22 @@ namespace Excercises
 
         private static void RunExcerciseOne()
         {
-            Console.WriteLine("You successfully ran excercise one!");
+            Console.WriteLine("You successfully ran excercise one!\n");
+            Console.ResetColor();
+            string firstName = "<firstname>", lastName = "<lastname>";
+            Console.WriteLine($"Hello {firstName} {lastName}! I'm glad to inform you that you are the test subject of my very first assignment!\n");
         }
         private static void RunExcerciseTwo()
         {
-            Console.WriteLine("You successfully ran excercise two!");
+            Console.WriteLine("You successfully ran excercise two!\n");
+            Console.ResetColor();
+            DateTime dateOfToday = DateTime.Now, 
+                     dateOfYesterday = dateOfToday.AddDays(-1), 
+                     dateOfTomorrow = dateOfToday.AddDays(1);
+            Console.WriteLine($"Todays date is {dateOfToday.ToShortDateString()}\n");
+            Console.WriteLine($"Tomorrow's date is {dateOfTomorrow.ToShortDateString()}\n");
+            Console.WriteLine($"Yesterday's date is {dateOfYesterday.ToShortDateString()}\n");
+            // subtracting two dates, you get back a TimeSpan-object with interval data
         }
         private static void RunExcerciseThree()
         {
