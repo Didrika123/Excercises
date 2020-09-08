@@ -35,6 +35,15 @@ namespace Excercises
                         case 6:
                             RunExcerciseSix();
                             break;
+                        case 7:
+                            RunExcerciseSeven();
+                            break;
+                        case 8:
+                            RunExcerciseEight();
+                            break;
+                        case 9:
+                            RunExcerciseNine();
+                            break;
                         case -1:
                             keepAlive = false;
                             break;
@@ -103,11 +112,91 @@ namespace Excercises
             Console.WriteLine("You successfully ran excercise five!\n");
             Console.ResetColor();
 
+            string str = "Arrays are very common in programming, they look something like: [1,2,3,4,5]";
+            string newStr = str.Substring(str.IndexOf('[')).Replace("2,3,", "");
+            newStr = newStr.Insert(newStr.IndexOf(']'), ",6,7,8,9,10");
+            Console.WriteLine(newStr + "\n");
         }
         private static void RunExcerciseSix()
         {
-            Console.WriteLine("You successfully ran excercise six!\n");
-            Console.ResetColor();
+            int numA, numB;
+            Console.Write("Number A: ");
+            numA = int.Parse(Console.ReadLine());
+            Console.Write("Number B: ");
+            numB = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"Biggest:   \t{(numA < numB? numB : numA)}");
+            Console.WriteLine($"Smallest:  \t{(numA < numB ? numA : numB)}");
+            Console.WriteLine($"Difference:\t{numA - numB}");
+            Console.WriteLine($"Sum:       \t{numA + numB}");
+            Console.WriteLine($"Product:   \t{numA * numB}");
+            Console.WriteLine($"Ratio:     \t{Math.Round((double) numA / numB, 2)}");
+        }
+        private static void RunExcerciseSeven()
+        {
+            double num;
+            Console.Write("Radius: ");
+            num = double.Parse(Console.ReadLine());
+            Console.WriteLine("Area:   " + Math.Round(num * num * Math.PI, 2) + " au");
+            Console.WriteLine("Volume: " + 4 * Math.Round(Math.Pow(num, 3) * Math.PI / 3, 2) + " vu");
+        }
+        private static void RunExcerciseEight()
+        {
+            double num;
+            Console.Write("Number: ");
+            num = double.Parse(Console.ReadLine());
+            Console.WriteLine($"√n:     \t{Math.Round(Math.Sqrt(num), 2)}");
+            Console.WriteLine($"n^2:    \t{num * num}");
+            Console.WriteLine($"n^10:   \t{Math.Pow(num,10)}");
+        }
+        private static bool IsUserWilling(string yesnoquestion)
+        {
+            bool confirm;
+            string response = "";
+            while(response != "yes" && response != "no")
+            {
+                Console.Write(yesnoquestion);
+                response = Console.ReadLine().ToLower();
+            }
+            if (response == "yes")
+                confirm = true;
+            else 
+                confirm = false;
+            return confirm;
+        }
+        private static void RunExcerciseNine()
+        {
+            string name = "<name>";
+            int birthyear, age;
+            Console.Write("Enter your name: ");
+            name = Console.ReadLine();
+            Console.Write($"Greetings {name}!\nWhat is your birth year?");
+            birthyear = int.Parse(Console.ReadLine());
+            age = DateTime.Now.Year - birthyear;
+
+            if(age >= 18)
+            {
+                if(IsUserWilling("Want a beer? "))
+                {
+                    Console.WriteLine("A beer, you shall have my dude!");
+                }
+                else
+                {
+                    if (IsUserWilling("Want coke? "))
+                    {
+                        Console.WriteLine("Coke!!!, you shall have my dude!");
+                    }
+                    else Console.WriteLine("You're too picky. Go home!");
+                }
+            }
+            else
+            {
+                if (IsUserWilling("Want coke? "))
+                {
+                    Console.WriteLine("Coke!!!, you shall have my dude!");
+                }
+                else Console.WriteLine("You're too picky. Go home!");
+            }
 
         }
     }
