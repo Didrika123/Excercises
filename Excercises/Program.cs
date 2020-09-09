@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Excercises
 {
@@ -568,27 +569,158 @@ namespace Excercises
         }
         static int DrawCard(ref int[] deck)
         {
-            int drawnCard = 0;
+            int len = deck.Length, drawnCard = -1;
+            if(len > 0)
+            {
+                drawnCard = deck[len-1];
+                Array.Resize(ref deck, len - 1);
+            }
             return drawnCard;
         }
         static void ShuffleCards(ref int[] deck)
         {
-
+            Random rand = new Random();
+            int len = deck.Length;
+            for(int i = 0; i < len; i++)
+            {
+                int randomIndex = rand.Next(0, len);
+                int temp = deck[randomIndex];
+                deck[randomIndex] = deck[i];
+                deck[i] = temp;
+            }
+        }
+        static int[] BuildDeck()
+        {
+            var deck = new int[52];
+            for (int i = 0; i < 13; i++)
+                for (int j = 0; j < 4; j++)
+                    deck[i * 4 + j] = i + 1; //[1,1,1,1,2,2,2,2,3,3,... 13]
+            return deck;
         }
         private static void RunExcerciseTwentyFour()
         {
+            var deck = BuildDeck();
+            var deckTwo = new int[0];
+            ShuffleCards(ref deck);
+            for (int i = 0; i < 52; i++)
+            {
+                int drawnCard = DrawCard(ref deck);
+                Console.Write(drawnCard + " ");
+                Array.Resize(ref deckTwo, deckTwo.Length + 1);
+                deckTwo[deckTwo.Length - 1] = drawnCard;
+            }
+
+            for (int i = 0; i < 52; i++)
+            {
+                int drawnCard = DrawCard(ref deckTwo);
+                Console.Write(drawnCard + " ");
+            }
+            Console.WriteLine();
+
+        }
+        private static int AskUserForNumber()
+        {
+            bool validNumber = false;
+            int num = 0;
+            while (!validNumber)
+            {
+                validNumber = true;
+                try
+                {
+                    Console.Write("Enter number: ");
+                    num = int.Parse(Console.ReadLine());
+                }
+                catch(FormatException e)
+                {
+                    validNumber = false;
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("You didn't enter a number. Please try again.");
+                }
+                catch (OverflowException e)
+                {
+                    validNumber = false;
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("The number is too BIG! Please try again.");
+                }
+            }
+            return num;
         }
         private static void RunExcerciseTwentyFive()
         {
+            int numA = AskUserForNumber();
+            int numB = AskUserForNumber();
+            try
+            {
+                int result = numA / numB;
+                Console.WriteLine($"{numA} / {numB} = {result}");
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Sorry, unable to divide by zero.");
+            }
         }
         private static void RunExcerciseTwentySix()
         {
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86));
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.Cookies));
+            Console.WriteLine(Environment.CurrentDirectory);
+
+            try
+            {
+                FileStream file = File.Create(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\HELLO_DESKTOP.txt");
+                file.Close();
+                Console.WriteLine("File successfully created on your desktop!");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Unable to create file on desktop.");
+            }
         }
         private static void RunExcerciseTwentySeven()
         {
+            /*
+             * Right click project -> add new item -> textfile -> rightclick and properties set Always Copy TO output directory (To bin directory after compilation)
+             * Note: Some files bigger than RAM for ReadToEnd() and can cause OutOfMemoryException
+             */
+            try
+            {
+                StreamReader sr = File.OpenText(Environment.CurrentDirectory + @"\names.txt");
+                Console.WriteLine(sr.ReadToEnd());
+                sr.Close();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
         private static void RunExcerciseTwentyEight()
         {
+            var names = new string[] { "Barney", "Oakwood", "Simon", "Ella", "Molly" };
+            var namesTwo = new string[] { "Jordan", "Timothy", "Bob", "Bella", "Ray" };
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\HELLO_DESKTOP.txt";
+            try
+            {
+                if(File.Exists(path))
+                    Console.WriteLine("File exists: " + path);
+                else
+                    Console.WriteLine("File does not exists (But will be created): " + path);
+
+                StreamWriter sw = File.CreateText(path); //this works same as new StreamWriter(path);
+                sw.WriteLine(String.Join("\n", names));
+                sw.Close();
+
+                sw = new StreamWriter(path, true);
+                sw.WriteLine(String.Join("\n", namesTwo));
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
