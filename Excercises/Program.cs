@@ -77,6 +77,30 @@ namespace Excercises
                         case 20:
                             RunExcerciseTwenty();
                             break;
+                        case 21:
+                            RunExcerciseTwentyOne();
+                            break;
+                        case 22:
+                            RunExcerciseTwentyTwo();
+                            break;
+                        case 23:
+                            RunExcerciseTwentyThree();
+                            break;
+                        case 24:
+                            RunExcerciseTwentyFour();
+                            break;
+                        case 25:
+                            RunExcerciseTwentyFive();
+                            break;
+                        case 26:
+                            RunExcerciseTwentySix();
+                            break;
+                        case 27:
+                            RunExcerciseTwentySeven();
+                            break;
+                        case 28:
+                            RunExcerciseTwentyEight();
+                            break;
                         case -1:
                             keepAlive = false;
                             break;
@@ -408,11 +432,162 @@ namespace Excercises
         }
         private static void RunExcerciseEighteen()
         {
+            Console.WriteLine();
+            var numbers = new int[10];
+            for (int i = 0; i < numbers.Length; i++)
+                numbers[i] = new Random().Next(1, 100);
+            var doubles = new double[10];
+            for (int i = 0; i < numbers.Length; i++)
+                doubles[i] = 1.0 / numbers[i];
+            foreach (var num in numbers)
+            {
+                Console.Write(num + "\t");
+            }
+            Console.WriteLine();
+            foreach (var num in doubles)
+            {
+                Console.Write(Math.Round(num, 3) + "\t");
+            }
+            Console.WriteLine("\n");
+
         }
         private static void RunExcerciseNineteen()
         {
+            var cashUnits = new int[] { 1, 2, 5, 10, 20, 50, 100, 200, 500 };
+            var cashUnitsStr = new string[] { "Enkronor", "Tvakronor", "Femmor", "Tior", "Tjugolappar", "Femtilappar", "Hundralappar", "Tvahundralappar", "Femhundralappar" } ;
+            int price = new Random().Next(1, 1000), cashGiven;
+            Console.Write($"\nThe total price amounts to {price} kr.\nYou give me cash: ");
+            cashGiven = int.Parse(Console.ReadLine());
+
+            int change = cashGiven - price;
+            int numCashUnits = cashUnits.Length;
+            var changeInUnits = new int[numCashUnits];
+            Console.WriteLine($"\nYou're change is {change} kr, given to you in the following units:\n");
+            while (change > 0)
+            {
+                for(int i = numCashUnits - 1; i >= 0 ; i--)
+                {
+                    int cashUnit = cashUnits[i];
+                    changeInUnits[i] = change / cashUnit;
+                    change = change % cashUnit;
+                }
+            }
+            for (int i = numCashUnits - 1; i >= 0; i--)
+            {
+                int numOfUnit = changeInUnits[i];
+                if (numOfUnit > 0)
+                {
+                    Console.WriteLine($"{cashUnitsStr[i]+ ":", -20} {numOfUnit} st");
+                }
+            }
+            Console.WriteLine("\nTHANK YOU COME AGAIN!\n");
         }
         private static void RunExcerciseTwenty()
+        {
+            int size = 10, numEven = 0, numOdd = 0;
+            var numbers = new int[size];
+            var numbersSortedIsh = new int[size];
+            for (int i = 0; i < size; i++)
+                numbers[i] = new Random().Next(1, 100);
+            Array.Sort(numbers);
+            foreach (var num in numbers)
+            {
+                Console.Write(num + "\t");
+                if (num % 2 == 0)
+                    numbersSortedIsh[numEven++] = num;
+                else
+                    numbersSortedIsh[size - 1 - numOdd++] = num;
+            }
+            Console.WriteLine();
+            foreach (var num in numbersSortedIsh)
+            {
+                Console.Write(num + "\t");
+            }
+            Console.WriteLine();
+        }
+        private static void RunExcerciseTwentyOne()
+        {
+            string input;
+            Console.Write("\nNumbers separated by comma (,): ");
+            input = Console.ReadLine().Replace(" ", "");
+            var numberStrings = input.Split(',');
+            int len = numberStrings.Length;
+            int sum = 0, min = int.MaxValue, max = int.MinValue;
+            foreach(var numStr in numberStrings)
+            {
+                int num = int.Parse(numStr);
+                sum += num;
+                if (num > max)
+                    max = num;
+                if (num < min)
+                    min = num;
+            }
+            double average = Math.Round((double)sum / len, 2);
+            Console.WriteLine($"Max: {max}\t Min: {min}\t Average: {average}");
+        }
+        private static void RunExcerciseTwentyTwo()
+        {
+            var swears = new string[] { "bollocks", "hell", "god" }; //Do not invoke God in vain
+            Console.Write("\nProfanity filter: ");
+            string input = Console.ReadLine();
+            StringComparison strcomp = StringComparison.OrdinalIgnoreCase;
+            foreach(var swear in swears)
+            {
+                input = input.Replace(swear, "*****", strcomp);
+            }
+            Console.WriteLine("Filtered output: " + input);
+        }
+        private static void RunExcerciseTwentyThree()
+        {
+            int len = 7, min = 1, max = 27;
+            var uniqueNumbers = new int[len];
+            Random random = new Random();
+            for (int i = 0; i < len; i++)
+            {
+                bool unique = false;
+                int newNumber = -1;
+                while (!unique)
+                {
+                    unique = true;
+                    newNumber = random.Next(min, max + 1);
+                    for (int j = 0; j < i && unique; j++)
+                    {
+                        if (uniqueNumbers[j] == newNumber)
+                            unique = false;
+                    }
+                }
+                uniqueNumbers[i] = newNumber;
+            }
+            //Array.Sort(uniqueNumbers);
+            Console.WriteLine($"{len} Unique & Random numbers between {min} and {max+1}:");
+            foreach (var num in uniqueNumbers)
+            {
+                Console.Write($"{num + "\t", 0}");
+            }
+            Console.WriteLine();
+        }
+        static int DrawCard(ref int[] deck)
+        {
+            int drawnCard = 0;
+            return drawnCard;
+        }
+        static void ShuffleCards(ref int[] deck)
+        {
+
+        }
+        private static void RunExcerciseTwentyFour()
+        {
+        }
+        private static void RunExcerciseTwentyFive()
+        {
+        }
+        private static void RunExcerciseTwentySix()
+        {
+        }
+        private static void RunExcerciseTwentySeven()
+        {
+        }
+        private static void RunExcerciseTwentyEight()
         {
         }
     }
