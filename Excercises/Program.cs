@@ -355,15 +355,56 @@ namespace Excercises
             Console.WriteLine("\n");
 
 
-            //then do 15B: Write first 3 perfect numbers.
-            int thirdPerfectNumber = -1;
+            //then do 15B: Write first perfect numbers.
+            int x = 4, count = 4; // Perfect number 5 is to inefficient to calculate
+            Console.Write($"\nThe first {count} perfect numbers:");
+            while (count > 0)
+            {
+                int sumDivisors = 0;
+                for(int y = 1; y < x / 2 + 1; y++)
+                {
+                    if (x % y == 0)
+                        sumDivisors += y;
+                }
+                if(sumDivisors == x)
+                {
+                    Console.Write(" " + x);
+                    count--;
+                }
+                x++;
+            }
             Console.WriteLine("\n");
         }
         private static void RunExcerciseSixteen()
         {
+            int num;
+            Console.Write("\nNumber: ");
+            num = int.Parse(Console.ReadLine());
+            Console.Write("Fibonacci numbers:");
+            int prevprev = 0, prev = 1, sum;
+            for(int i = 0; i < num; i++)
+            { 
+                Console.Write(" " + prevprev);
+                sum = prevprev + prev;
+                prevprev = prev;
+                prev = sum;
+            }
+            Console.WriteLine("\n");
         }
         private static void RunExcerciseSeventeen()
         {
+            string input;
+            Console.Write("\nWord: ");
+            input = Console.ReadLine().ToLower().Replace(" ", "");
+            bool palindrome = true;
+            int len = input.Length;
+            //if its odd length string just ignore center char (since it will always palindromize)
+            for (int i = 0; i < len / 2 && palindrome; i++)
+            {
+                if (input[i] != input[len - i - 1])
+                    palindrome = false;
+            }
+            Console.WriteLine("A palindrome? " + palindrome + "\n");
         }
         private static void RunExcerciseEighteen()
         {
